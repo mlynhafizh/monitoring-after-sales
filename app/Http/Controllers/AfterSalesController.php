@@ -1,0 +1,97 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\AfterSales;
+use Illuminate\Http\Request;
+
+class AfterSalesController extends Controller
+{
+    /**
+     * Display a listing of the resource.
+     */
+    public function index()
+    {
+        $data = AfterSales::latest()->get();
+
+        return view('after-sales.index', compact('data'));
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create()
+    {
+        return view('after-sales.create');
+    
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(Request $request)
+    {
+        $request->validate([
+            'tanggal_akuisisi' => 'required|date',
+            'merchant' => 'required',
+            'tanggal_after_sales' => 'required|date',
+            'kode_cabang' => 'required',
+            'nip' => 'required',
+            'jabatan' => 'required',
+            'status_merchant' => 'required|in:Aktif,nonAktif',
+            'kendala' => 'required',
+            'cross_selling' => 'required',
+        ]);
+
+        AfterSales::create($request->all());
+
+        return redirect()->route('after-sales.create')->with('success', 'Data berhasil disimpan!');
+    }
+    public function export()
+    {
+    $data = \App\Models\AfterSales::all(); // Pastikan modelnya sesuai
+
+        $csv = "Nama Merchant,Status Merchant,Kendala,Tanggal\n";
+
+        foreach ($data as $row) {
+            $csv .= "{$row->nama_merchant},{$row->status_merchant},{$row->kendala}," . $row->created_at->format('d-m-Y') . "\n";
+        }
+
+    return response($csv)
+        ->header('Content-Type', 'text/csv')
+        ->header('Content-Disposition', 'attachment; filename="after_sales_export.csv"');
+    }   
+}
+
+//     /**
+//      * Display the specified resource.
+//      */
+//     public function show(AfterSales $afterSales)
+//     {
+//         //
+//     }
+
+//     /**
+//      * Show the form for editing the specified resource.
+//      */
+//     public function edit(AfterSales $afterSales)
+//     {
+//         //
+//     }
+
+//     /**
+//      * Update the specified resource in storage.
+//      */
+//     public function update(Request $request, AfterSales $afterSales)
+//     {
+//         //
+//     }
+
+//     /**
+//      * Remove the specified resource from storage.
+//      */
+//     public function destroy(AfterSales $afterSales)
+//     {
+//         //
+//     }
+// }
