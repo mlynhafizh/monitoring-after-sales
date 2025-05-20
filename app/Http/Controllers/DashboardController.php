@@ -23,17 +23,17 @@ class DashboardController extends Controller
         $aktif_merchant = AfterSales::where('status_merchant', 'Aktif')->count();
         $nonAktif_merchant = AfterSales::where('status_merchant', 'nonAktif')->count();
 
-        // Kendala: Ya vs Tidak
-        $kendala = AfterSales::where('kendala', '!=', '-')->whereNotNull('kendala')->count();
-        $tidakKendala = AfterSales::where('kendala', '-')->orWhereNull('kendala')->count();
+         // Kendala: Ya vs Tidak
+         $kendala = AfterSales::where('kendala', '!=', '-')->whereNotNull('kendala')->count();
+         $tidakKendala = AfterSales::where('kendala', '-')->orWhereNull('kendala')->count();
 
         // Pie Chart Kendala Merchant (hitung "-" sebagai 'Tidak Ada Kendala', lainnya sebagai 'Ada Kendala')
-         $kendala_data = AfterSales::select(
-                 DB::raw("CASE WHEN kendala = '-' THEN 'Tidak Ada Kendala' ELSE 'Ada Kendala' END as kendala"),
-                 DB::raw('count(*) as total')
+        $kendala_data = AfterSales::select(
+            DB::raw("CASE WHEN kendala = '-' OR kendala IS NULL THEN 'Tidak Ada Kendala' ELSE 'Ada Kendala' END as kendala"),
+            DB::raw('count(*) as total')
         )
-             ->groupBy('kendala')
-             ->get();
+        ->groupBy('kendala')
+        ->get();
 
         return view('dashboard', compact(
             'jumlah_user',

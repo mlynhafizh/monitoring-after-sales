@@ -24,6 +24,8 @@
             <a href="{{ route('dashboard') }}" class="block bg-blue-500 p-2 rounded hover:bg-blue-400">Dashboard</a>
             <a href="{{ route('after-sales.index') }}" class="block bg-blue-500 p-2 rounded hover:bg-blue-400">List Data</a>
             <a href="{{ route('after-sales.create') }}" class="block bg-blue-500 p-2 rounded hover:bg-blue-400">Input Data</a>
+            <a href="{{ route('profile-merchant.index') }}" class="block bg-blue-500 p-2 rounded hover:bg-blue-400">List Merchant</a>
+            <a href="{{ route('profile-merchant.create') }}" class="block bg-blue-500 p-2 rounded hover:bg-blue-400">Input Profil Merchant</a>
         </nav>
     </aside>
 

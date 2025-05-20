@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AfterSalesController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\ProfileMerchantController;
 
 
 Route::get('/', function () {
@@ -26,6 +27,12 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    // Profile Merchant
+    Route::get('/profile-merchant', [ProfileMerchantController::class, 'index'])->name('profile-merchant.index');
+    Route::get('/profile-merchant/create', [ProfileMerchantController::class, 'create'])->name('profile-merchant.create');
+    Route::post('/profile-merchant', [ProfileMerchantController::class, 'store'])->name('profile-merchant.store');
+
 });
 
 // Route::resource('after-sales', AfterSalesController::class)->middleware('auth');

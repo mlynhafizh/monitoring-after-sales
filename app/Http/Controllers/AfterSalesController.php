@@ -51,16 +51,30 @@ class AfterSalesController extends Controller
     {
     $data = \App\Models\AfterSales::all(); // Pastikan modelnya sesuai
 
-        $csv = "Nama Merchant,Status Merchant,Kendala,Tanggal\n";
+        $csv = "\"Tanggal After Sales\",\"NIP\",\"Jabatan\",\"Kode Cabang\",\"Merchant\",\"Tanggal Akuisisi\",\"Status Merchant\",\"Kendala\",\"Cross Selling\",\"Created At\"\n";
 
-        foreach ($data as $row) {
-            $csv .= "{$row->nama_merchant},{$row->status_merchant},{$row->kendala}," . $row->created_at->format('d-m-Y') . "\n";
-        }
-
+     foreach ($data as $row) {
+        $csv .= '"' . $this->escapeCsv($row->tanggal_after_sales) . '",'
+              . '"' . $this->escapeCsv($row->nip) . '",'
+              . '"' . $this->escapeCsv($row->jabatan) . '",'
+              . '"' . $this->escapeCsv($row->kode_cabang) . '",'
+              . '"' . $this->escapeCsv($row->merchant) . '",'
+              . '"' . $this->escapeCsv($row->tanggal_akuisisi) . '",'
+              . '"' . $this->escapeCsv($row->status_merchant) . '",'
+              . '"' . $this->escapeCsv($row->kendala) . '",'
+              . '"' . $this->escapeCsv($row->cross_selling) . '",'
+              . '"' . $row->created_at->format('d-m-Y') . '"' . "\n";
+    }
     return response($csv)
         ->header('Content-Type', 'text/csv')
         ->header('Content-Disposition', 'attachment; filename="after_sales_export.csv"');
-    }   
+    }
+    private function escapeCsv($value)
+    {
+        $escaped = str_replace('"', '""', $value); // Escape kutip ganda
+        return $escaped;
+    }  
+
 }
 
 //     /**
