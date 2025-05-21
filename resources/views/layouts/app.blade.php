@@ -15,7 +15,7 @@
 <body class="flex bg-gray-100 min-h-screen">
 
     {{-- Sidebar --}}
-    <aside class="w-64 bg-blue-600 text-white flex flex-col p-4 h-screen">
+    <aside class="w-64 bg-blue-600 text-white flex flex-col p-4 h-screen sticky top-0 left-0 z-20">
         <div class="text-center mb-6">
             <div class="text-lg font-semibold">{{ Auth::user()->name ?? 'User' }}</div>
         </div>

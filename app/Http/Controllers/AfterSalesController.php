@@ -10,11 +10,21 @@ class AfterSalesController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $data = AfterSales::latest()->get();
+        $sort = $request->get('sort', 'tanggal_after_sales');
+        $direction = $request->get('direction', 'desc');
+        $tanggalFilter = $request->get('tanggal_filter');
 
-        return view('after-sales.index', compact('data'));
+        $query = AfterSales::orderBy($sort, $direction);
+
+        if ($tanggalFilter) {
+            $query->whereDate('tanggal_after_sales', $tanggalFilter);
+        }
+
+        $data = $query->get();
+
+        return view('after-sales.index', compact('data', 'sort', 'direction'));
     }
 
     /**
@@ -76,36 +86,3 @@ class AfterSalesController extends Controller
     }  
 
 }
-
-//     /**
-//      * Display the specified resource.
-//      */
-//     public function show(AfterSales $afterSales)
-//     {
-//         //
-//     }
-
-//     /**
-//      * Show the form for editing the specified resource.
-//      */
-//     public function edit(AfterSales $afterSales)
-//     {
-//         //
-//     }
-
-//     /**
-//      * Update the specified resource in storage.
-//      */
-//     public function update(Request $request, AfterSales $afterSales)
-//     {
-//         //
-//     }
-
-//     /**
-//      * Remove the specified resource from storage.
-//      */
-//     public function destroy(AfterSales $afterSales)
-//     {
-//         //
-//     }
-// }

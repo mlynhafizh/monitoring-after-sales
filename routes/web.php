@@ -32,6 +32,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/profile-merchant', [ProfileMerchantController::class, 'index'])->name('profile-merchant.index');
     Route::get('/profile-merchant/create', [ProfileMerchantController::class, 'create'])->name('profile-merchant.create');
     Route::post('/profile-merchant', [ProfileMerchantController::class, 'store'])->name('profile-merchant.store');
+    Route::get('/profile-merchant/export', [ProfileMerchantController::class, 'export'])->name('profile-merchant.export');
+
 
 });
 
