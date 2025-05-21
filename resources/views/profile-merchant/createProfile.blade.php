@@ -173,7 +173,7 @@
             </select>
         </div>
 
-        <div>
+        {{-- <div> --}}
             {{-- <label class="block font-semibold">No HP</label>
             <input type="text" name="no_hp" class="w-full border p-2 rounded" required>
         </div>

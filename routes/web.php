@@ -22,6 +22,10 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/after-sales', [AfterSalesController::class, 'store'])->name('after-sales.store');
     Route::get('/after-sales/export', [AfterSalesController::class, 'export'])->name('after-sales.export');
     Route::get('/after-sales', [AfterSalesController::class, 'index'])->name('after-sales.index');
+    Route::get('after-sales/{id}/edit', [AfterSalesController::class, 'edit'])->name('after-sales.edit');
+    Route::put('after-sales/{id}', [AfterSalesController::class, 'update'])->name('after-sales.update');
+    Route::delete('after-sales/{id}', [AfterSalesController::class, 'destroy'])->name('after-sales.destroy');
+
 
     // Profile
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -33,6 +37,10 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/profile-merchant/create', [ProfileMerchantController::class, 'create'])->name('profile-merchant.create');
     Route::post('/profile-merchant', [ProfileMerchantController::class, 'store'])->name('profile-merchant.store');
     Route::get('/profile-merchant/export', [ProfileMerchantController::class, 'export'])->name('profile-merchant.export');
+    Route::get('/profile-merchant/{id}/edit', [ProfileMerchantController::class, 'edit'])->name('profile-merchant.edit');
+    Route::put('/profile-merchant/{id}', [ProfileMerchantController::class, 'update'])->name('profile-merchant.update');
+    Route::delete('/profile-merchant/{id}', [ProfileMerchantController::class, 'destroy'])->name('profile-merchant.destroy');
+
 
 
 });

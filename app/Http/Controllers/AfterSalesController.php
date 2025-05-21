@@ -22,7 +22,8 @@ class AfterSalesController extends Controller
             $query->whereDate('tanggal_after_sales', $tanggalFilter);
         }
 
-        $data = $query->get();
+        $data = $query->paginate(15);
+
 
         return view('after-sales.index', compact('data', 'sort', 'direction'));
     }
@@ -57,6 +58,35 @@ class AfterSalesController extends Controller
 
         return redirect()->route('after-sales.create')->with('success', 'Data berhasil disimpan!');
     }
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'tanggal_akuisisi' => 'required|date',
+            'merchant' => 'required',
+            'tanggal_after_sales' => 'required|date',
+            'kode_cabang' => 'required',
+            'nip' => 'required',
+            'jabatan' => 'required',
+            'status_merchant' => 'required|in:Aktif,nonAktif',
+            'kendala' => 'required',
+            'cross_selling' => 'required',
+        ]);
+
+        $afterSales = AfterSales::findOrFail($id);
+        $afterSales->update($request->all());
+
+        return redirect()->route('after-sales.index')->with('success', 'Data berhasil diperbarui!');
+    }
+
+
+    public function destroy($id)
+    {
+        $afterSales = AfterSales::findOrFail($id);
+        $afterSales->delete();
+
+        return redirect()->route('after-sales.index')->with('success', 'Data berhasil dihapus!');
+    }
+
     public function export()
     {
     $data = \App\Models\AfterSales::all(); // Pastikan modelnya sesuai
@@ -83,6 +113,12 @@ class AfterSalesController extends Controller
     {
         $escaped = str_replace('"', '""', $value); // Escape kutip ganda
         return $escaped;
-    }  
+    } 
+    
+    public function edit($id)
+    {
+        $afterSales = AfterSales::findOrFail($id);
+        return view('after-sales.edit', compact('afterSales'));
+    }
 
 }

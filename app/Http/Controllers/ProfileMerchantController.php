@@ -7,27 +7,65 @@ use App\Models\ProfileMerchant;
 
 class ProfileMerchantController extends Controller
 {
+    // public function index(Request $request)
+    // {
+    //     // $sort = $request->get('sort', 'tanggal_gabung'); // default sort
+    //     // $direction = $request->get('direction', 'asc');  // default direction
+
+    //     // $merchants = ProfileMerchant::orderBy($sort, $direction)->get();
+
+    //     // return view('profile-merchant.listProfile', compact('merchants', 'sort', 'direction'));
+    //     $sort = $request->get('sort', 'tanggal_gabung');
+    //     $direction = $request->get('direction', 'desc');
+    //     $tanggalFilter = $request->get('tanggal_filter');
+
+    //     $query = ProfileMerchant::orderBy($sort, $direction);
+
+    //     if ($tanggalFilter) {
+    //         $query->whereDate('tanggal_gabung', $tanggalFilter);
+    //     }
+
+    //     $merchants = $query->get();
+
+    //     return view('profile-merchant.listProfile', compact('merchants', 'sort', 'direction'));
+    // }
+
     public function index(Request $request)
     {
-        // $sort = $request->get('sort', 'tanggal_gabung'); // default sort
-        // $direction = $request->get('direction', 'asc');  // default direction
+        $query = ProfileMerchant::query();
 
-        // $merchants = ProfileMerchant::orderBy($sort, $direction)->get();
-
-        // return view('profile-merchant.listProfile', compact('merchants', 'sort', 'direction'));
-        $sort = $request->get('sort', 'tanggal_gabung');
-        $direction = $request->get('direction', 'desc');
-        $tanggalFilter = $request->get('tanggal_filter');
-
-        $query = ProfileMerchant::orderBy($sort, $direction);
-
-        if ($tanggalFilter) {
-            $query->whereDate('tanggal_gabung', $tanggalFilter);
+        // Search
+        if ($request->filled('search')) {
+            $search = $request->search;
+            $query->where(function ($q) use ($search) {
+                $q->where('nama_merchant', 'like', "%$search%")
+                ->orWhere('alamat', 'like', "%$search%");
+            });
         }
+        
+        // Filter tanggal
+        // if ($request->has('tanggal_filter')) {
+        //     $query->whereDate('tanggal_gabung', $request->tanggal_filter);
+        // } Jangan dipake
 
-        $merchants = $query->get();
+        $tanggalFilter = $request->get('tanggal_filter');
+         if ($tanggalFilter) {
+             $query->whereDate('tanggal_gabung', $tanggalFilter);
+         }
 
-        return view('profile-merchant.listProfile', compact('merchants', 'sort', 'direction'));
+
+        // Sorting
+        $sort = $request->input('sort', 'tanggal_gabung');
+        $direction = $request->input('direction', 'asc');
+        $query->orderBy($sort, $direction);
+
+        $merchants = $query->paginate(15)->appends($request->all());
+
+        return view('profile-merchant.listProfile', [
+            'merchants' => $merchants,
+            'sort' => $sort,
+            'direction' => $direction
+        ]);
     }
 
     public function create()
@@ -71,4 +109,25 @@ class ProfileMerchantController extends Controller
         $escaped = str_replace('"', '""', $value); // Escape kutip ganda
         return $escaped;
     }  
+    public function edit($id)
+    {
+        $merchant = ProfileMerchant::findOrFail($id);
+        return view('profile-merchant.editProfile', compact('merchant'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $merchant = ProfileMerchant::findOrFail($id);
+        $merchant->update($request->all());
+
+        return redirect()->route('profile-merchant.index')->with('success', 'Data berhasil diperbarui');
+    }
+
+    public function destroy($id)
+    {
+        $merchant = ProfileMerchant::findOrFail($id);
+        $merchant->delete();
+
+        return redirect()->route('profile-merchant.index')->with('success', 'Data berhasil dihapus');
+    }
 }

@@ -32,7 +32,18 @@
                     Filter
                 </button>
             </noscript>
+                <div class="flex items-center space-x-2">
+                    <label for="search" class="font-semibold text-gray-700">Search:</label>
+                    <input type="text" name="search" id="search" placeholder="Cari merchant atau alamat"
+                        value="{{ request('search') }}"
+                        class="border border-gray-300 p-2 rounded shadow-sm focus:outline-none focus:ring focus:border-blue-400">
+                </div>
+
+            <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded shadow">
+                Cari
+            </button>
         </form>
+
     <div class="flex justify-end mb-2">
         <a href="{{ route('profile-merchant.export') }}" class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded shadow">
             Export to CSV
@@ -52,6 +63,7 @@
                 <th class="px-4 py-3">{!! sortLink('kredit_kum_kur', 'Kredit KUM/KUR', $sort, $direction) !!}</th>
                 <th class="px-4 py-3">{!! sortLink('mandiri_cm', 'Mandiri Cash Management', $sort, $direction) !!}</th>
                 <th class="px-4 py-3">{!! sortLink('livin', 'Livin', $sort, $direction) !!}</th>
+                <th class="px-4 py-3">Aksi</th>            
             </tr>
         </thead>
         <tbody>
@@ -68,8 +80,20 @@
                     <td class="px-4 py-2 border">{{ $m->kredit_kum_kur }}</td>
                     <td class="px-4 py-2 border">{{ $m->mandiri_cm }}</td>
                     <td class="px-4 py-2 border">{{ $m->livin }}</td>
-                    {{-- <td class="px-4 py-2 border">{{ $m->no_hp }}</td>
-                    <td class="px-4 py-2 border">{{ $m->email }}</td> --}}
+                    <td class="px-4 py-2 border space-x-1">
+                        <a href="{{ route('profile-merchant.edit', $m->id) }}"
+                            class="bg-yellow-400 hover:bg-yellow-500 text-white px-2 py-1 rounded text-sm">Edit</a>
+                        <form action="{{ route('profile-merchant.destroy', $m->id) }}"
+                              method="POST"
+                              class="inline-block"
+                              onsubmit="return confirm('Yakin ingin menghapus data ini?');">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="bg-red-600 hover:bg-red-700 text-white px-2 py-1 rounded text-sm">
+                                Delete
+                            </button>
+                        </form>
+                    </td>
                 </tr>
             @empty
                 <tr>
@@ -78,5 +102,8 @@
             @endforelse
         </tbody>
     </table>
+    <div class="mt-4">
+        {{ $merchants->links('pagination::tailwind') }}
+    </div>
 </div>
 @endsection

@@ -93,6 +93,7 @@
                 </button>
             </noscript>
         </form>
+        {{-- Tombol Export CSV --}}
         <div class="flex justify-end mb-2">
             <a href="{{ route('after-sales.export') }}" class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded shadow">
                 Export to CSV
@@ -112,6 +113,7 @@
                             <th class="px-4 py-3">{!! sortLink('status_merchant', 'Status', $sort, $direction) !!}</th>
                             <th class="px-4 py-3">{!! sortLink('kendala', 'Kendala', $sort, $direction) !!}</th>
                             <th class="px-4 py-3">{!! sortLink('cross_selling', 'Produk Ditawarkan', $sort, $direction) !!}</th>
+                            <th class="px-4 py-3">Aksi</th>
                         </tr>
                     </thead>
                 <tbody class="bg-white divide-y divide-gray-200">
@@ -126,6 +128,21 @@
                             <td class="px-4 py-2">{{ $row->status_merchant }}</td>
                             <td class="px-4 py-2">{{ $row->kendala }}</td>
                             <td class="px-4 py-2">{{ $row->cross_selling }}</td>
+                            <td class="px-4 py-2 space-x-2">
+                                <a href="{{ route('after-sales.edit', $row->id) }}"
+                                    class="bg-yellow-500 hover:bg-yellow-600 text-white px-3 py-1 rounded text-xs">
+                                    Edit
+                                </a>
+                                <form action="{{ route('after-sales.destroy', $row->id) }}" method="POST" class="inline-block"
+                                        onsubmit="return confirm('Yakin ingin menghapus data ini?')">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit"
+                                            class="bg-red-600 hover:bg-red-700 text-white px-3 py-1 rounded text-xs">
+                                            Hapus
+                                    </button>
+                                </form>
+                            </td>
                         </tr>
                     @empty
                         <tr>
@@ -134,6 +151,9 @@
                     @endforelse
                 </tbody>
             </table>
+            <div class="mt-4">
+                {{ $data->withQueryString()->links() }}
+            </div>
         </div>
     </div>
 @endsection
