@@ -39,9 +39,18 @@
         </select>
     </div>
     <div>
-        <label class="block mb-1">Kendala (Jika tidak ada ketik "-")</label>
-        <input type="text" name="kendala" class="w-full border p-2 rounded" required>
+        <label class="block mb-1">Apakah Ada Kendala?</label>
+        <select name="ada_kendala" id="ada_kendala" class="w-full border p-2 rounded" required>
+            <option value="Tidak ada">Tidak ada Kendala</option>
+            <option value="Ada">Ada</option>
+        </select>
     </div>
+
+    <div id="form_kendala" class="hidden">
+        <label class="block mb-1 mt-4">Tuliskan Kendalanya</label>
+        <input type="text" name="kendala" id="kendala_input" class="w-full border p-2 rounded">
+    </div>
+
         <div>
         <label class="block mb-1">Produk Mandiri apa yang sudah ditawarkan?</label>
         <input type="text" name="cross_selling" class="w-full border p-2 rounded" required>
@@ -49,4 +58,27 @@
     </div>
     <button type="submit" class="bg-blue-700 hover:bg-blue-600 text-white py-2 px-4 rounded">Simpan</button>
 </form>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const adaKendalaSelect = document.getElementById('ada_kendala');
+        const kendalaInputDiv = document.getElementById('form_kendala');
+        const kendalaInput = document.getElementById('kendala_input');
+
+        function toggleKendalaField() {
+            if (adaKendalaSelect.value === 'Ada') {
+                kendalaInputDiv.classList.remove('hidden');
+                kendalaInput.required = true;
+            } else {
+                kendalaInputDiv.classList.add('hidden');
+                kendalaInput.required = false;
+                kendalaInput.value = '-'; // default jika tidak ada kendala
+            }
+        }
+
+        adaKendalaSelect.addEventListener('change', toggleKendalaField);
+
+        // Jalankan saat awal halaman dimuat
+        toggleKendalaField();
+    });
+</script>
 @endsection

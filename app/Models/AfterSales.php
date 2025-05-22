@@ -14,6 +14,7 @@ class AfterSales extends Model
     'nip',
     'jabatan',
     'status_merchant',
+    'ada_kendala',// kolom baru jika ada_kendala atau tidak
     'kendala',
     'cross_selling',
     ];

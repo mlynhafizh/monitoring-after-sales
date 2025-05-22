@@ -50,32 +50,84 @@ class AfterSalesController extends Controller
             'nip' => 'required',
             'jabatan' => 'required',
             'status_merchant' => 'required|in:Aktif,nonAktif',
-            'kendala' => 'required',
             'cross_selling' => 'required',
+            'ada_kendala' => 'required|in:Ada,Tidak ada',
+            'kendala' => 'nullable|string',
         ]);
 
-        AfterSales::create($request->all());
+        $ada_kendala = $request->input('ada_kendala');
+        $kendala = $request->input('kendala') ?? '-';
+        // $kendala = $request->input('ada_kendala') === 'Ada'
+        //     ? $request->input('kendala')
+        //     : '-';
+
+        AfterSales::create([
+            'tanggal_akuisisi' => $request->input('tanggal_akuisisi'),
+            'merchant' => $request->input('merchant'),
+            'tanggal_after_sales' => $request->input('tanggal_after_sales'),
+            'kode_cabang' => $request->input('kode_cabang'),
+            'nip' => $request->input('nip'),
+            'jabatan' => $request->input('jabatan'),
+            'status_merchant' => $request->input('status_merchant'),
+            'kendala' => $kendala,
+            'ada_kendala' => $ada_kendala,
+            'cross_selling' => $request->input('cross_selling'),
+        ]);
 
         return redirect()->route('after-sales.create')->with('success', 'Data berhasil disimpan!');
     }
     public function update(Request $request, $id)
     {
-        $request->validate([
-            'tanggal_akuisisi' => 'required|date',
-            'merchant' => 'required',
-            'tanggal_after_sales' => 'required|date',
-            'kode_cabang' => 'required',
-            'nip' => 'required',
-            'jabatan' => 'required',
-            'status_merchant' => 'required|in:Aktif,nonAktif',
-            'kendala' => 'required',
-            'cross_selling' => 'required',
-        ]);
+        // $request->validate([
+        //     'tanggal_akuisisi' => 'required|date',
+        //     'merchant' => 'required',
+        //     'tanggal_after_sales' => 'required|date',
+        //     'kode_cabang' => 'required',
+        //     'nip' => 'required',
+        //     'jabatan' => 'required',
+        //     'status_merchant' => 'required|in:Aktif,nonAktif',
+        //     'kendala' => 'required',
+        //     'cross_selling' => 'required',
+        // ]);
 
-        $afterSales = AfterSales::findOrFail($id);
-        $afterSales->update($request->all());
+        // $afterSales = AfterSales::findOrFail($id);
+        // $afterSales->update($request->all());
 
-        return redirect()->route('after-sales.index')->with('success', 'Data berhasil diperbarui!');
+        // return redirect()->route('after-sales.index')->with('success', 'Data berhasil diperbarui!');
+            $request->validate([
+                'tanggal_akuisisi' => 'required|date',
+                'merchant' => 'required',
+                'tanggal_after_sales' => 'required|date',
+                'kode_cabang' => 'required',
+                'nip' => 'required',
+                'jabatan' => 'required',
+                'status_merchant' => 'required|in:Aktif,nonAktif',
+                'cross_selling' => 'required',
+                'ada_kendala' => 'required|in:Ada,Tidak ada',
+                'kendala' => 'nullable|string',
+            ]);
+
+            $afterSales = AfterSales::findOrFail($id);
+
+            $kendala = $request->input('ada_kendala') === 'Ada'
+                ? $request->input('kendala')
+                : '-';
+
+            $afterSales->update([
+                'tanggal_akuisisi' => $request->input('tanggal_akuisisi'),
+                'merchant' => $request->input('merchant'),
+                'tanggal_after_sales' => $request->input('tanggal_after_sales'),
+                'kode_cabang' => $request->input('kode_cabang'),
+                'nip' => $request->input('nip'),
+                'jabatan' => $request->input('jabatan'),
+                'status_merchant' => $request->input('status_merchant'),
+                'kendala' => $kendala,
+                'ada_kendala' => $ada_kendala,
+                'cross_selling' => $request->input('cross_selling'),
+            ]);
+
+            return redirect()->route('after-sales.index')->with('success', 'Data berhasil diperbarui!');
+
     }
 
 

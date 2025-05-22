@@ -50,7 +50,7 @@
     const kendalaChart = new Chart(document.getElementById('kendalaChart'), {
         type: 'pie',
         data: {
-            labels: {!! json_encode($kendala_data->pluck('kendala')) !!},
+            labels: {!! json_encode($kendala_data->pluck('ada_kendala')) !!},
             datasets: [{
                 data: {!! json_encode($kendala_data->pluck('total')) !!},
                 backgroundColor: ['#34D399', '#FBBF24'],

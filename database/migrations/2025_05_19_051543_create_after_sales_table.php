@@ -20,6 +20,7 @@ return new class extends Migration
         $table->string('nip');
         $table->string('jabatan');
         $table->enum('status_merchant', ['Aktif', 'nonAktif']);
+        $table->enum('ada_kendala', ['Ada', 'Tidak Ada']);
         $table->text('kendala')->nullable();
         $table->text('cross_selling')->nullable();
         $table->timestamps();
