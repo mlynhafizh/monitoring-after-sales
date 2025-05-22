@@ -1,4 +1,4 @@
-<x-guest-layout>
+{{-- <x-guest-layout>
     <!-- Session Status -->
     <x-auth-session-status class="mb-4" :status="session('status')" />
 
@@ -44,4 +44,39 @@
             </x-primary-button>
         </div>
     </form>
+</x-guest-layout> --}}
+
+<x-guest-layout>
+    <form method="POST" action="{{ route('login') }}" class="space-y-4">
+        @csrf
+
+        <!-- Email -->
+        <div>
+            <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+            <input id="email" type="email" name="email" required autofocus
+                   class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-400">
+        </div>
+
+        <!-- Password -->
+        <div>
+            <label for="password" class="block text-sm font-medium text-gray-700">Kata Sandi</label>
+            <input id="password" type="password" name="password" required
+                   class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-400">
+        </div>
+
+        <!-- Button -->
+        <div class="flex justify-between items-center mt-4">
+            <a href="{{ route('password.request') }}" class="text-sm text-blue-700 hover:underline">Lupa password?</a>
+            <button class="bg-yellow-400 hover:bg-yellow-500 text-blue-900 font-semibold px-4 py-2 rounded-md">
+                Masuk
+            </button>
+        </div>
+    </form>
+
+    <p class="mt-4 text-sm text-center text-gray-600">
+        Belum punya akun?
+        <a href="{{ route('register') }}" class="text-blue-700 hover:underline font-medium">Daftar</a>
+    </p>
 </x-guest-layout>
+
+

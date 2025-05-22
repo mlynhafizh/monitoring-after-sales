@@ -17,6 +17,7 @@ Route::middleware(['auth'])->group(function () {
     // Dashboard
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
+
     // After Sales
     Route::get('/after-sales/create', [AfterSalesController::class, 'create'])->name('after-sales.create');
     Route::post('/after-sales', [AfterSalesController::class, 'store'])->name('after-sales.store');

@@ -8,10 +8,17 @@
         <div>
             <h4 class="text-xl font-semibold">Halo, {{ Auth::user()->name ?? 'User' }}!</h4>
         </div>
-        <div>
+        {{-- <div>
             <label class="mr-2">Tanggal:</label>
             <input type="date" class="border p-2 rounded">
-        </div>
+        </div> --}}
+        <form method="GET" action="{{ route('dashboard') }}" class="flex items-center mb-4">
+            <label for="tanggal" class="mr-2">Tanggal:</label>
+            <input type="date" id="tanggal" name="tanggal"
+            value="{{ request('tanggal') ?? \Carbon\Carbon::today()->toDateString() }}"
+            class="border p-2 rounded mr-2">
+            <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">Filter</button>
+        </form>
     </div>
 
     <div class="mb-4 bg-blue-100 text-blue-800 p-4 rounded">

@@ -1,4 +1,4 @@
-<x-guest-layout>
+{{-- <x-guest-layout>
     <form method="POST" action="{{ route('register') }}">
         @csrf
 
@@ -49,4 +49,50 @@
             </x-primary-button>
         </div>
     </form>
+</x-guest-layout> --}}
+
+<x-guest-layout>
+    <form method="POST" action="{{ route('register') }}" class="space-y-4">
+        @csrf
+
+        <!-- Nama -->
+        <div>
+            <label for="name" class="block text-sm font-medium text-gray-700">Nama Lengkap</label>
+            <input id="name" type="text" name="name" required autofocus
+                   class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-400">
+        </div>
+
+        <!-- Email -->
+        <div>
+            <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+            <input id="email" type="email" name="email" required
+                   class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-400">
+        </div>
+
+        <!-- Password -->
+        <div>
+            <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
+            <input id="password" type="password" name="password" required
+                   class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-400">
+        </div>
+
+        <!-- Confirm Password -->
+        <div>
+            <label for="password_confirmation" class="block text-sm font-medium text-gray-700">Konfirmasi Password</label>
+            <input id="password_confirmation" type="password" name="password_confirmation" required
+                   class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-400">
+        </div>
+
+        <!-- Register Button -->
+        <div class="flex justify-end">
+            <button class="bg-yellow-400 hover:bg-yellow-500 text-blue-900 font-semibold px-4 py-2 rounded-md">
+                Daftar
+            </button>
+        </div>
+    </form>
+
+    <p class="mt-4 text-sm text-center text-gray-600">
+        Sudah punya akun?
+        <a href="{{ route('login') }}" class="text-blue-700 hover:underline font-medium">Masuk</a>
+    </p>
 </x-guest-layout>
