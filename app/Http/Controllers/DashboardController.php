@@ -42,6 +42,52 @@ class DashboardController extends Controller
             ->groupBy('ada_kendala')
             ->get();
 
+        $monthlyUsers = AfterSales::selectRaw("DATE_FORMAT(tanggal_after_sales, '%Y-%m') as bulan, COUNT(DISTINCT nip) as total")
+            ->groupBy('bulan')
+            ->orderBy('bulan')
+            ->get();
+            
+ 
+            $labels = $monthlyUsers->pluck('bulan');
+            $data = $monthlyUsers->pluck('total');
+           
+        // // Ambil bulan dan tahun dari tanggal filter
+        // $bulan = Carbon::parse($tanggal)->format('m');
+        // $tahun = Carbon::parse($tanggal)->format('Y');
+
+        // // Data harian user after sales dalam 1 bulan
+        // $dailyUsers = AfterSales::selectRaw("DATE(tanggal_after_sales) as tanggal, COUNT(DISTINCT nip) as total")
+        //     ->whereYear('tanggal_after_sales', $tahun)
+        //     ->whereMonth('tanggal_after_sales', $bulan)
+        //     ->groupBy('tanggal')
+        //     ->orderBy('tanggal')
+        //     ->get();
+
+        // $dailyUsersByStatus = AfterSales::selectRaw("DATE(tanggal_after_sales) as tanggal, status_merchant, COUNT(DISTINCT nip) as total")
+        //     ->whereYear('tanggal_after_sales', $tahun)
+        //     ->whereMonth('tanggal_after_sales', $bulan)
+        //     ->groupBy('tanggal', 'status_merchant')
+        //     ->orderBy('tanggal')
+        //     ->get();
+
+        //  $labels = [];
+        //  $dataAktif = [];
+        //  $dataNonAktif = [];
+
+        //  $datesInMonth = Carbon::parse("$tahun-$bulan-01")->daysInMonth;
+
+        //  for ($i = 1; $i <= $datesInMonth; $i++) {
+        //      $date = Carbon::create($tahun, $bulan, $i)->toDateString();
+        //      $labels[] = Carbon::create($tahun, $bulan, $i)->format('d M');
+
+        //      // Ambil data untuk tanggal dan status tertentu
+        //      $aktif = $dailyUsersByStatus->firstWhere(fn($d) => $d->tanggal == $date && $d->status_merchant == 'Aktif');
+        //      $nonAktif = $dailyUsersByStatus->firstWhere(fn($d) => $d->tanggal == $date && $d->status_merchant == 'nonAktif');
+
+        //      $dataAktif[] = $aktif ? $aktif->total : 0;
+        //      $dataNonAktif[] = $nonAktif ? $nonAktif->total : 0;
+        //  }
+    
         return view('dashboard', compact(
             'jumlah_user',
             'status_data',
@@ -50,7 +96,10 @@ class DashboardController extends Controller
             'kendala',
             'kendala_data',
             'tidakKendala',
-            'tanggal' // dikirim agar date picker bisa menampilkan tanggal terpilih
+            'tanggal', // dikirim agar date picker bisa menampilkan tanggal terpilih
+            'monthlyUsers',
+            'labels',
+            'data',
         ));
-    }
-    }
+    } 
+}

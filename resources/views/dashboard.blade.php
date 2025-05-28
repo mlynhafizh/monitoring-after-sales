@@ -38,6 +38,12 @@
             <canvas id="kendalaChart" width="300" height="300" class="mx-auto"></canvas>
         </div>
     </div>
+
+    <div>
+        <h3 class="text-lg font-semibold mb-2">Jumlah User After Sales </h3>
+        <canvas id="userChart" height="120"></canvas>
+    </div> 
+
 </div>
 @endsection
 @section('scripts')
@@ -65,4 +71,64 @@
         }
     });
 </script>
+
+{{-- <script>
+    const ctx = document.getElementById('timeseriesChart').getContext('2d');
+    const timeseriesChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: {!! json_encode($monthlyUsers->pluck('bulan')) !!},
+            datasets: [{
+                label: 'Jumlah NIP Unik per Bulan',
+                data: {!! json_encode($monthlyUsers->pluck('total')) !!},
+                backgroundColor: 'rgba(0, 123, 255, 0.2)',
+                borderColor: 'rgba(0, 123, 255, 1)',
+                borderWidth: 2,
+                fill: true,
+                tension: 0.3
+            }]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    ticks: {
+                        precision: 0
+                    }
+                }
+            }
+        }
+    });
+</script> --}}
+
+<script>
+    const userChart = new Chart(document.getElementById('userChart'), {
+        type: 'line',
+        data: {
+            labels: {!! json_encode($monthlyUsers->pluck('bulan')) !!},
+            datasets: [{
+                label: 'Jumlah User',
+                data: {!! json_encode($monthlyUsers->pluck('total')) !!},
+                borderColor: '#3B82F6',
+                backgroundColor: 'rgba(59, 130, 246, 0.2)',
+                fill: true,
+                tension: 0.3,
+                pointBackgroundColor: '#3B82F6',
+            }]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    ticks: {
+                        precision: 0
+                    }
+                }
+            }
+        }
+    });
+</script>
+
 @endsection

@@ -10,17 +10,22 @@
 
         <div>
             <label class="block font-semibold">Tanggal Akuisisi</label>
-            <input type="date" name="tanggal_gabung" class="w-full border p-2 rounded" required>
+            <input type="date" name="tanggal_gabung" value="{{ old('tanggal_gabung', $merchant->tanggal_gabung) }}" class="w-full border p-2 rounded" required>
         </div>
 
         <div>
             <label class="block font-semibold">Nama Merchant</label>
-            <input type="text" name="nama_merchant" class="w-full border p-2 rounded" required>
+            <input type="text" name="nama_merchant" value="{{ old('nama_merchant', $merchant->nama_merchant) }}" class="w-full border p-2 rounded" required>
         </div>
 
         <div>
             <label class="block font-semibold">Alamat</label>
-            <textarea name="alamat" class="w-full border p-2 rounded" required></textarea>
+            <textarea name="alamat" class="w-full border p-2 rounded" required>{{ old('alamat', $merchant->alamat) }}</textarea>
+        </div>
+
+        <div>
+            <label class="block font-semibold">No HP</label>
+            <input type="text" name="no_hp" value="{{ old('no_hp', $merchant->no_hp) }}" class="w-full border p-2 rounded">
         </div>
 
         <div>

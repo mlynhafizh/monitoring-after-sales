@@ -7,29 +7,6 @@ use App\Models\ProfileMerchant;
 
 class ProfileMerchantController extends Controller
 {
-    // public function index(Request $request)
-    // {
-    //     // $sort = $request->get('sort', 'tanggal_gabung'); // default sort
-    //     // $direction = $request->get('direction', 'asc');  // default direction
-
-    //     // $merchants = ProfileMerchant::orderBy($sort, $direction)->get();
-
-    //     // return view('profile-merchant.listProfile', compact('merchants', 'sort', 'direction'));
-    //     $sort = $request->get('sort', 'tanggal_gabung');
-    //     $direction = $request->get('direction', 'desc');
-    //     $tanggalFilter = $request->get('tanggal_filter');
-
-    //     $query = ProfileMerchant::orderBy($sort, $direction);
-
-    //     if ($tanggalFilter) {
-    //         $query->whereDate('tanggal_gabung', $tanggalFilter);
-    //     }
-
-    //     $merchants = $query->get();
-
-    //     return view('profile-merchant.listProfile', compact('merchants', 'sort', 'direction'));
-    // }
-
     public function index(Request $request)
     {
         $query = ProfileMerchant::query();
@@ -42,11 +19,6 @@ class ProfileMerchantController extends Controller
                 ->orWhere('alamat', 'like', "%$search%");
             });
         }
-        
-        // Filter tanggal
-        // if ($request->has('tanggal_filter')) {
-        //     $query->whereDate('tanggal_gabung', $request->tanggal_filter);
-        // } Jangan dipake
 
         $tanggalFilter = $request->get('tanggal_filter');
          if ($tanggalFilter) {
@@ -84,12 +56,13 @@ class ProfileMerchantController extends Controller
     {
     $data = \App\Models\ProfileMerchant::all(); // Pastikan modelnya sesuai
 
-        $csv = "\"Tgl Akuisisi\",\"Nama Merchant\",\"Alamat\",\"Payroll\",\"Deposito\",\"MTB\",\"Giro\",\"Kredit SME\",\"Kredit KUM/KUR\",\"Mandiri CM\",\"Livin\",\"Created At\"\n";
+        $csv = "\"Tgl Akuisisi\",\"Nama Merchant\",\"Alamat\",\"No HP/Telepon\",\"Payroll\",\"Deposito\",\"MTB\",\"Giro\",\"Kredit SME\",\"Kredit KUM/KUR\",\"Mandiri CM\",\"Livin\",\"Created At\"\n";
 
      foreach ($data as $row) {
         $csv .= '"' . $this->escapeCsv($row->tanggal_gabung) . '",'
               . '"' . $this->escapeCsv($row->nama_merchant) . '",'
               . '"' . $this->escapeCsv($row->alamat) . '",'
+              . '"' . $this->escapeCsv($row->no_hp) . '",'
               . '"' . $this->escapeCsv($row->payroll) . '",'
               . '"' . $this->escapeCsv($row->deposito) . '",'
               . '"' . $this->escapeCsv($row->mtb) . '",'

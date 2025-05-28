@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AfterSalesController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProfileMerchantController;
+use App\Http\Controllers\Kernel;
+use App\Http\Controllers\Middleware\RoleMiddleware;
 
 
 Route::get('/', function () {
@@ -12,11 +14,12 @@ Route::get('/', function () {
 });
 
 // Auth middleware group
-Route::middleware(['auth'])->group(function () {
+// Route::middleware(['auth'])->group(function () {
 
+Route::middleware(['auth'])->group(function () {
+//Route::middleware(['auth', 'role:admin,user'])->group(function () { //Role not work
     // Dashboard
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-
 
     // After Sales
     Route::get('/after-sales/create', [AfterSalesController::class, 'create'])->name('after-sales.create');
@@ -46,6 +49,19 @@ Route::middleware(['auth'])->group(function () {
 
 });
 
-// Route::resource('after-sales', AfterSalesController::class)->middleware('auth');
+
 
 require __DIR__.'/auth.php';
+
+// Route::resource('after-sales', AfterSalesController::class)->middleware('auth');
+
+
+// // hanya admin
+// Route::middleware(['auth', 'role:admin'])->group(function () {
+//     Route::get('/admin-dashboard', [AdminController::class, 'index']);
+// });
+
+// // admin dan user
+// Route::middleware(['auth', 'role:admin,user'])->group(function () {
+//     Route::get('/common-dashboard', [DashboardController::class, 'index']);
+// });

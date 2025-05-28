@@ -10,6 +10,7 @@ class ProfileMerchant extends Model
         'tanggal_gabung',
         'nama_merchant',
         'alamat',
+        'no_hp',
         'payroll',
         'deposito', 
         'mtb',

@@ -55,6 +55,7 @@
                 <th class="px-4 py-3">{!! sortLink('tanggal_gabung', 'Tgl Akuisisi', $sort, $direction) !!}</th>
                 <th class="px-4 py-3">{!! sortLink('nama_merchant', 'Nama Merchant', $sort, $direction) !!}</th>
                 <th class="px-4 py-3">{!! sortLink('alamat', 'Alamat', $sort, $direction) !!}</th>
+                <th class="px-4 py-3">{!! sortLink('no_hp', 'No HP/Telepon', $sort, $direction) !!}</th>
                 <th class="px-4 py-3">{!! sortLink('payroll', 'Payroll', $sort, $direction) !!}</th>
                 <th class="px-4 py-3">{!! sortLink('deposito', 'Deposito', $sort, $direction) !!}</th>
                 <th class="px-4 py-3">{!! sortLink('mtb', 'Mandiri Tabungan Bisnis', $sort, $direction) !!}</th>
@@ -72,6 +73,7 @@
                     <td class="px-4 py-2 border">{{ \Carbon\Carbon::parse($m->tanggal_gabung)->format('d-m-Y') }}</td>
                     <td class="px-4 py-2 border">{{ $m->nama_merchant }}</td>
                     <td class="px-4 py-2 border text-left">{{ $m->alamat }}</td>
+                    <td class="px-4 py-2 border">{{ $m->no_hp }}</td>
                     <td class="px-4 py-2 border">{{ $m->payroll }}</td>
                     <td class="px-4 py-2 border">{{ $m->deposito }}</td>
                     <td class="px-4 py-2 border">{{ $m->mtb }}</td>
