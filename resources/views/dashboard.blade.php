@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="p-6">
-    <h2 class="text-2xl font-bold mb-4">Welcome to Monitoring Dashboard After Sales Merchants Bank Mandiri Cabang Falatehan</h2>
+    <h2 class="text-2xl font-bold mb-4">Welcome to Dashboard After Sales Livin' Merchant dan EDC Bank Mandiri Cabang Falatehan</h2>
 
     <div class="flex justify-between items-center mb-4">
         <div>
@@ -24,8 +24,29 @@
     <div class="mb-4 bg-blue-100 text-blue-800 p-4 rounded">
         Yang sudah melakukan After Sales sebanyak <strong>{{ $jumlah_user }}</strong> users
     </div>
-
+{{--
     <div class="grid grid-cols-1 gap-6">
+        
+        <div>
+            <h3 class="text-lg font-semibold mb-2">Pie Chart Merchants Aktif / Non Aktif</h3>
+            <canvas id="statusChart" width="300" height="300" class="mx-auto"></canvas>
+        </div>
+
+    
+        <div>
+            <h3 class="text-lg font-semibold mb-2">Pie Chart Kendala Merchant</h3>
+            <canvas id="kendalaChart" width="300" height="300" class="mx-auto"></canvas>
+        </div>
+    </div>
+
+    <div>
+        <h3 class="text-lg font-semibold mb-2">Jumlah User After Sales </h3>
+        <canvas id="userChart" height="120"></canvas>
+    </div>   --}}
+
+<div class="grid grid-cols-3 gap-6">
+    {{-- Kolom kiri: Pie Charts --}}
+    <div class="flex flex-col gap-6 col-span-1">
         {{-- Pie Chart Status Merchant --}}
         <div>
             <h3 class="text-lg font-semibold mb-2">Pie Chart Merchants Aktif / Non Aktif</h3>
@@ -39,10 +60,12 @@
         </div>
     </div>
 
-    <div>
+    {{-- Kolom kanan: Time Series Chart --}}
+    <div class="col-span-2">
         <h3 class="text-lg font-semibold mb-2">Jumlah User After Sales </h3>
-        <canvas id="userChart" height="120"></canvas>
-    </div> 
+        <canvas id="userChart" height="300"></canvas>
+    </div>
+</div>
 
 </div>
 @endsection

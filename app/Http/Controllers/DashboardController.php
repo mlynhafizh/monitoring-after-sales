@@ -42,7 +42,7 @@ class DashboardController extends Controller
             ->groupBy('ada_kendala')
             ->get();
 
-        $monthlyUsers = AfterSales::selectRaw("DATE_FORMAT(tanggal_after_sales, '%Y-%m') as bulan, COUNT(DISTINCT nip) as total")
+        $monthlyUsers = AfterSales::selectRaw("DATE_FORMAT(tanggal_after_sales, '%Y-%m-%d') as bulan, COUNT(DISTINCT nip) as total")//tambahkan %d untuk tampilan per hari
             ->groupBy('bulan')
             ->orderBy('bulan')
             ->get();
