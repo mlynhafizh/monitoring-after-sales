@@ -31,7 +31,7 @@ class ProfileMerchantController extends Controller
         $direction = $request->input('direction', 'asc');
         $query->orderBy($sort, $direction);
 
-        $merchants = $query->paginate(15)->appends($request->all());
+        $merchants = $query->paginate(10)->appends($request->all());
 
         return view('profile-merchant.listProfile', [
             'merchants' => $merchants,

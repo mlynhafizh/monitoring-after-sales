@@ -78,10 +78,10 @@
     }
 @endphp
 
-<div class="container mx-auto px-4 py-6">
+<div class="container mx-auto px-4 py-6 pb-32">
         <h1 class="text-2xl font-bold mb-6 text-black-800">After Sales Monitoring</h1>
         {{-- Filter tanggal --}}
-        <form method="GET" action="{{ route('after-sales.index') }}" class="flex items-center space-x-2 mb-6">
+        <form method="GET" action="{{ route('after-sales.index') }}" class="flex flex-col sm:flex-row sm:items-center sm:space-x-2 space-y-2 sm:space-y-0 mb-4">
             <label for="tanggal_filter" class="font-semibold text-gray-700">Filter Tanggal:</label>
             <input type="date" name="tanggal_filter" id="tanggal_filter"
                 value="{{ request('tanggal_filter') }}"
@@ -130,7 +130,7 @@
                             <td class="px-4 py-2">{{ $row->cross_selling }}</td>
                             <td class="px-4 py-2 space-x-2">
                                 <a href="{{ route('after-sales.edit', $row->id) }}"
-                                    class="bg-yellow-500 hover:bg-yellow-600 text-white px-3 py-1 rounded text-xs">
+                                    class="bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded text-xs">
                                     Edit
                                 </a>
                                 <form action="{{ route('after-sales.destroy', $row->id) }}" method="POST" class="inline-block"
@@ -138,7 +138,7 @@
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit"
-                                            class="bg-red-600 hover:bg-red-700 text-white px-3 py-1 rounded text-xs">
+                                            class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded text-xs">
                                             Hapus
                                     </button>
                                 </form>

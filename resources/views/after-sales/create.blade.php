@@ -51,12 +51,16 @@
         <input type="text" name="kendala" id="kendala_input" class="w-full border p-2 rounded">
     </div>
 
-        <div>
+    <div>
         <label class="block mb-1">Produk Mandiri apa yang sudah ditawarkan?</label>
         <input type="text" name="cross_selling" class="w-full border p-2 rounded" required>
 
     </div>
-    <button type="submit" class="bg-blue-700 hover:bg-blue-600 text-white py-2 px-4 rounded">Simpan</button>
+    <div class="pt-4 pb-24">
+        <button type="submit" class="bg-blue-700 hover:bg-blue-600 text-white py-2 px-4 rounded">
+            Simpan
+        </button>
+    </div>
 </form>
 <script>
     document.addEventListener('DOMContentLoaded', function () {

@@ -5,8 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AfterSalesController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProfileMerchantController;
-use App\Http\Controllers\Kernel;
-use App\Http\Controllers\Middleware\RoleMiddleware;
+use App\Http\Middleware\RoleMiddleware;
 
 
 Route::get('/', function () {
@@ -17,7 +16,7 @@ Route::get('/', function () {
 // Route::middleware(['auth'])->group(function () {
 
 Route::middleware(['auth'])->group(function () {
-//Route::middleware(['auth', 'role:admin,user'])->group(function () { //Role not work
+//Route::middleware(['auth', RoleMiddleware::class.':admin','user'])->group(function () {
     // Dashboard
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 

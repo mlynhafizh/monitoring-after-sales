@@ -106,7 +106,7 @@
             <input type="date" name="tanggal_gabung_optional" class="w-full border p-2 rounded">
         </div> --}}
 
-        <div>
+        <div class="pt-4 pb-24">
             <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-500">
                 Simpan
             </button>

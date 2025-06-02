@@ -20,7 +20,7 @@
 @endphp
 
 
-<div class="overflow-x-auto">
+<div class="overflow-x-auto pb-32">
         <form method="GET" action="{{ route('profile-merchant.index') }}" class="flex items-center space-x-2 mb-6">
             <label for="tanggal_filter" class="font-semibold text-gray-700">Filter Tanggal:</label>
             <input type="date" name="tanggal_filter" id="tanggal_filter"
@@ -84,14 +84,16 @@
                     <td class="px-4 py-2 border">{{ $m->livin }}</td>
                     <td class="px-4 py-2 border space-x-1">
                         <a href="{{ route('profile-merchant.edit', $m->id) }}"
-                            class="bg-yellow-400 hover:bg-yellow-500 text-white px-2 py-1 rounded text-sm">Edit</a>
+                            class="bg-yellow-400 hover:bg-yellow-500 text-white px-4 py-2 rounded text-sm">
+                            Edit
+                        </a>
                         <form action="{{ route('profile-merchant.destroy', $m->id) }}"
                               method="POST"
                               class="inline-block"
                               onsubmit="return confirm('Yakin ingin menghapus data ini?');">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="bg-red-600 hover:bg-red-700 text-white px-2 py-1 rounded text-sm">
+                            <button type="submit" class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded text-sm">
                                 Delete
                             </button>
                         </form>

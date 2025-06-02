@@ -22,7 +22,7 @@ class AfterSalesController extends Controller
             $query->whereDate('tanggal_after_sales', $tanggalFilter);
         }
 
-        $data = $query->paginate(15);
+        $data = $query->paginate(10);
 
 
         return view('after-sales.index', compact('data', 'sort', 'direction'));
