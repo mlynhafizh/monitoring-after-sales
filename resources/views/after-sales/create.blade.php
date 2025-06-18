@@ -36,6 +36,21 @@
         <label class="block mb-1">Kode Cabang</label>
         <select name="kode_cabang" class="w-full border p-2 rounded">
             <option value="12600">12600</option>
+            <option value="12601">12601</option>
+            <option value="12602">12602</option>
+            <option value="12603">12603</option>
+            <option value="12605">12605</option>
+            <option value="12606">12606</option>
+            <option value="12607">12607</option>
+            <option value="12609">12609</option>
+            <option value="12610">12610</option>
+            <option value="12611">12611</option>
+            <option value="12614">12614</option>
+            <option value="12618">12618</option>
+            <option value="12619">12619</option>
+            <option value="12620">12620</option>
+            <option value="12622">12622</option>
+            <option value="12675">12675</option>
         </select>
     </div>
     <div>

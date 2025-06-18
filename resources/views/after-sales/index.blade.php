@@ -92,6 +92,19 @@
                     Filter
                 </button>
             </noscript>
+
+            {{-- Search --}}
+            <div class="flex flex-col sm:flex-row sm:items-center sm:space-x-2 w-full">
+                <label for="search" class="font-semibold text-gray-700">Search:</label>
+                <input type="text" name="search" id="search" placeholder="Cari merchant atau kendala"
+                    value="{{ request('search') }}"
+                    class="border border-gray-300 p-2 rounded shadow-sm focus:outline-none focus:ring focus:border-blue-400">
+
+        
+                <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded shadow">
+                    Cari
+                </button>
+            </div>
         </form>
         {{-- Tombol Export CSV --}}
         <div class="flex justify-end mb-2">
@@ -99,6 +112,7 @@
                 Export to CSV
             </a>
         </div>
+
         {{-- Tabel After Sales --}}
         <div class="overflow-x-auto bg-white rounded-lg shadow overflow-y-auto relative">
             <table class="w-full table-auto text-sm text-left text-gray-500">
@@ -128,20 +142,21 @@
                             <td class="px-4 py-2">{{ $row->status_merchant }}</td>
                             <td class="px-4 py-2">{{ $row->kendala }}</td>
                             <td class="px-4 py-2">{{ $row->cross_selling }}</td>
-                            <td class="px-4 py-2 space-x-2">
-                                <a href="{{ route('after-sales.edit', $row->id) }}"
-                                    class="bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded text-xs">
-                                    Edit
-                                </a>
-                                <form action="{{ route('after-sales.destroy', $row->id) }}" method="POST" class="inline-block"
-                                        onsubmit="return confirm('Yakin ingin menghapus data ini?')">
+                            <td class="px-3 py-1">
+                                <div class="flex space-x-2">
+                                    <a href="{{ route('after-sales.edit', $row->id) }}"
+                                        class="bg-yellow-500 hover:bg-yellow-600 text-white px-3 py-1 rounded text-xs shadow">
+                                        Edit
+                                    </a>
+                                    <form action="{{ route('after-sales.destroy', $row->id) }}" method="POST" onsubmit="return confirm('Yakin ingin menghapus data ini?')">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit"
-                                            class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded text-xs">
+                                            class="bg-red-600 hover:bg-red-700 text-white px-3 py-1 rounded text-xs shadow">
                                             Hapus
-                                    </button>
-                                </form>
+                                        </button>
+                                    </form>
+                                </div>
                             </td>
                         </tr>
                     @empty

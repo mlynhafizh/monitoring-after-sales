@@ -37,13 +37,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     @vite(['resources/css/app.css', 'resources/js/app.js']) <!-- Laravel Vite -->
 </head>
-<body class="bg-gradient-to-br from-blue-900 to-blue-700 min-h-screen flex items-center justify-center font-sans">
-    <div class="w-full max-w-md bg-white shadow-lg rounded-xl p-8">
-        <div class="flex flex-col items-center mb-6">
-            <img src="{{ asset('/logo_bank.png') }}" alt="Logo Bank Mandiri" class="w-32 mb-2">
-            <h1 class="text-xl font-semibold text-blue-900">Portal Merchant After Sales</h1>
+<body class="bg-gradient-to-br from-blue-900 to-blue-700 min-h-screen flex items-center justify-center px-4 font-sans">
+
+    <div class="w-full max-w-sm sm:max-w-md bg-white shadow-lg rounded-xl p-6 sm:p-8">
+        <div class="flex flex-col items-center mb-6 text-center">
+            <img src="{{ asset('/logo_bank.png') }}" alt="Logo Bank Mandiri" class="w-24 sm:w-32 mb-3">
+            <h1 class="text-lg sm:text-xl font-semibold text-blue-900">Portal Merchant After Sales</h1>
         </div>
+
         {{ $slot }}
     </div>
+
 </body>
 </html>

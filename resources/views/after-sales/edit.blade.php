@@ -39,7 +39,21 @@
             <label class="block mb-1">Kode Cabang</label>
             <select name="kode_cabang" class="w-full border p-2 rounded" required>
                 <option value="12600" {{ old('kode_cabang', $afterSales->kode_cabang) == '12600' ? 'selected' : '' }}>12600</option>
-                {{-- Tambah opsi lain jika ada --}}
+                <option value="12601" {{ old('kode_cabang', $afterSales->kode_cabang) == '12601' ? 'selected' : '' }}>12601</option>
+                <option value="12602" {{ old('kode_cabang', $afterSales->kode_cabang) == '12602' ? 'selected' : '' }}>12602</option>
+                <option value="12603" {{ old('kode_cabang', $afterSales->kode_cabang) == '12603' ? 'selected' : '' }}>12603</option>
+                <option value="12605" {{ old('kode_cabang', $afterSales->kode_cabang) == '12605' ? 'selected' : '' }}>12605</option>
+                <option value="12606" {{ old('kode_cabang', $afterSales->kode_cabang) == '12606' ? 'selected' : '' }}>12606</option>
+                <option value="12607" {{ old('kode_cabang', $afterSales->kode_cabang) == '12607' ? 'selected' : '' }}>12607</option>
+                <option value="12609" {{ old('kode_cabang', $afterSales->kode_cabang) == '12609' ? 'selected' : '' }}>12609</option>
+                <option value="12610" {{ old('kode_cabang', $afterSales->kode_cabang) == '12610' ? 'selected' : '' }}>12610</option>
+                <option value="12611" {{ old('kode_cabang', $afterSales->kode_cabang) == '12611' ? 'selected' : '' }}>12611</option>
+                <option value="12614" {{ old('kode_cabang', $afterSales->kode_cabang) == '12614' ? 'selected' : '' }}>12614</option>
+                <option value="12618" {{ old('kode_cabang', $afterSales->kode_cabang) == '12618' ? 'selected' : '' }}>12618</option>
+                <option value="12619" {{ old('kode_cabang', $afterSales->kode_cabang) == '12619' ? 'selected' : '' }}>12619</option>
+                <option value="12620" {{ old('kode_cabang', $afterSales->kode_cabang) == '12620' ? 'selected' : '' }}>12620</option>
+                <option value="12622" {{ old('kode_cabang', $afterSales->kode_cabang) == '12622' ? 'selected' : '' }}>12622</option>
+                <option value="12675" {{ old('kode_cabang', $afterSales->kode_cabang) == '12675' ? 'selected' : '' }}>12675</option>
             </select>
         </div>
         <div>

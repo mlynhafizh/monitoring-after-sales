@@ -161,10 +161,10 @@
                    class="bg-yellow-400 hover:bg-yellow-500 text-blue-900 font-semibold px-6 py-3 rounded-lg transition duration-300">
                     Masuk
                 </a>
-                <a href="{{ route('register') }}"
+                {{-- <a href="{{ route('register') }}"
                    class="bg-blue-800 hover:bg-blue-900 text-white font-semibold px-6 py-3 rounded-lg transition duration-300">
                     Daftar
-                </a>
+                </a>  --}}
             @endauth
         </div>
     </div>

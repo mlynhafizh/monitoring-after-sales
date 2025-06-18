@@ -36,6 +36,8 @@
             <a href="{{ route('after-sales.create') }}" class="block bg-blue-500 p-2 rounded hover:bg-blue-400">Input After Sales</a>
             <a href="{{ route('profile-merchant.index') }}" class="block bg-blue-500 p-2 rounded hover:bg-blue-400">List Merchant</a>
             <a href="{{ route('profile-merchant.create') }}" class="block bg-blue-500 p-2 rounded hover:bg-blue-400">Input Profil Merchant</a>
+            <a href="{{ route('monitoring-edc.indexEDC') }}" class="block bg-blue-500 p-2 rounded hover:bg-blue-400">Progress Livin' Merchant dan EDC</a>
+            <a href="{{ route('monitoring-edc.createEDC') }}" class="block bg-blue-500 p-2 rounded hover:bg-blue-400">Input Progress Livin' Merchant dan EDC</a>
         </nav>
     </aside>
 

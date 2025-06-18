@@ -15,12 +15,21 @@ class AfterSalesController extends Controller
         $sort = $request->get('sort', 'tanggal_after_sales');
         $direction = $request->get('direction', 'desc');
         $tanggalFilter = $request->get('tanggal_filter');
-
+        $search = $request->get('search');
+        
         $query = AfterSales::orderBy($sort, $direction);
 
         if ($tanggalFilter) {
             $query->whereDate('tanggal_after_sales', $tanggalFilter);
         }
+
+        if (!empty($search)) {
+            $query->where(function ($q) use ($search) {
+                $q->where('merchant', 'like', "%$search%")
+                ->orWhere('kendala', 'like', "%$search%");
+            });
+        }
+ 
 
         $data = $query->paginate(10);
 
@@ -141,25 +150,25 @@ class AfterSalesController extends Controller
 
     public function export()
     {
-    $data = \App\Models\AfterSales::all(); // Pastikan modelnya sesuai
+        $data = \App\Models\AfterSales::all(); // Pastikan modelnya sesuai
 
         $csv = "\"Tanggal After Sales\",\"NIP\",\"Jabatan\",\"Kode Cabang\",\"Merchant\",\"Tanggal Akuisisi\",\"Status Merchant\",\"Kendala\",\"Cross Selling\",\"Created At\"\n";
 
-     foreach ($data as $row) {
-        $csv .= '"' . $this->escapeCsv($row->tanggal_after_sales) . '",'
-              . '"' . $this->escapeCsv($row->nip) . '",'
-              . '"' . $this->escapeCsv($row->jabatan) . '",'
-              . '"' . $this->escapeCsv($row->kode_cabang) . '",'
-              . '"' . $this->escapeCsv($row->merchant) . '",'
-              . '"' . $this->escapeCsv($row->tanggal_akuisisi) . '",'
-              . '"' . $this->escapeCsv($row->status_merchant) . '",'
-              . '"' . $this->escapeCsv($row->kendala) . '",'
-              . '"' . $this->escapeCsv($row->cross_selling) . '",'
-              . '"' . $row->created_at->format('d-m-Y') . '"' . "\n";
+        foreach ($data as $row) {
+            $csv .= '"' . $this->escapeCsv($row->tanggal_after_sales) . '",'
+                . '"' . $this->escapeCsv($row->nip) . '",'
+                . '"' . $this->escapeCsv($row->jabatan) . '",'
+                . '"' . $this->escapeCsv($row->kode_cabang) . '",'
+                . '"' . $this->escapeCsv($row->merchant) . '",'
+                . '"' . $this->escapeCsv($row->tanggal_akuisisi) . '",'
+                . '"' . $this->escapeCsv($row->status_merchant) . '",'
+                . '"' . $this->escapeCsv($row->kendala) . '",'
+                . '"' . $this->escapeCsv($row->cross_selling) . '",'
+                . '"' . $row->created_at->format('d-m-Y') . '"' . "\n";
     }
-    return response($csv)
-        ->header('Content-Type', 'text/csv')
-        ->header('Content-Disposition', 'attachment; filename="after_sales_export.csv"');
+        return response($csv)
+            ->header('Content-Type', 'text/csv')
+            ->header('Content-Disposition', 'attachment; filename="after_sales_export.csv"');
     }
     private function escapeCsv($value)
     {

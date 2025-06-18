@@ -82,21 +82,21 @@
                     <td class="px-4 py-2 border">{{ $m->kredit_kum_kur }}</td>
                     <td class="px-4 py-2 border">{{ $m->mandiri_cm }}</td>
                     <td class="px-4 py-2 border">{{ $m->livin }}</td>
-                    <td class="px-4 py-2 border space-x-1">
-                        <a href="{{ route('profile-merchant.edit', $m->id) }}"
-                            class="bg-yellow-400 hover:bg-yellow-500 text-white px-4 py-2 rounded text-sm">
-                            Edit
-                        </a>
-                        <form action="{{ route('profile-merchant.destroy', $m->id) }}"
-                              method="POST"
-                              class="inline-block"
-                              onsubmit="return confirm('Yakin ingin menghapus data ini?');">
+                    <td class="px-4 py-2">
+                        <div class="flex space-x-2">
+                            <a href="{{ route('profile-merchant.edit', $m->id) }}"
+                                class="bg-yellow-500 hover:bg-yellow-600 text-white px-3 py-1 rounded text-xs shadow">
+                                Edit
+                            </a>
+                        <form action="{{ route('profile-merchant.destroy', $m->id) }}" method="POST" onsubmit="return confirm('Yakin ingin menghapus data ini?')">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded text-sm">
-                                Delete
-                            </button>
+                                <button type="submit"
+                                    class="bg-red-600 hover:bg-red-700 text-white px-3 py-1 rounded text-xs shadow">
+                                    Hapus
+                                </button>
                         </form>
+                        </div>
                     </td>
                 </tr>
             @empty

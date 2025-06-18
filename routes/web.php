@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AfterSalesController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProfileMerchantController;
+use App\Http\Controllers\MonitoringEDCController;
 use App\Http\Middleware\RoleMiddleware;
 
 
@@ -43,6 +44,13 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/profile-merchant/{id}/edit', [ProfileMerchantController::class, 'edit'])->name('profile-merchant.edit');
     Route::put('/profile-merchant/{id}', [ProfileMerchantController::class, 'update'])->name('profile-merchant.update');
     Route::delete('/profile-merchant/{id}', [ProfileMerchantController::class, 'destroy'])->name('profile-merchant.destroy');
+
+        // Custom route untuk halaman index dan create dengan nama khusus
+    Route::get('/monitoring-edc/indexEDC', [MonitoringEDCController::class, 'index'])->name('monitoring-edc.indexEDC');
+    Route::get('/monitoring-edc/createEDC', [MonitoringEDCController::class, 'create'])->name('monitoring-edc.createEDC');
+    Route::post('/monitoring-edc', [MonitoringEDCController::class, 'store'])->name('monitoring-edc.store');
+    Route::get('/monitoring-edc/export', [MonitoringEDCController::class, 'export'])->name('monitoring-edc.export');
+    Route::resource('monitoring-edc', MonitoringEDCController::class);
 
 
 

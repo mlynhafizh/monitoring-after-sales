@@ -3,7 +3,7 @@
 @section('content')
 <div class="p-4 sm:p-6 max-w-screen-xl mx-auto">
     <h2 class="text-2xl font-bold mb-6 text-center sm:text-left">
-        Welcome to Dashboard After Sales Livin' Merchant dan EDC Bank Mandiri Cabang Falatehan
+        Welcome to Dashboard Monitoring Livin' Merchant dan EDC Bank Mandiri Cabang Falatehan
     </h2>
 
     <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-6 gap-4">
